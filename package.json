@@ -1,6 +1,6 @@
 {
-  "name": "dbus-next",
-  "version": "0.10.2",
+  "name": "@jellybrick/dbus-next",
+  "version": "0.10.3",
   "keywords": [
     "dbus",
     "dcop",
@@ -25,14 +25,14 @@
   "types": "types.d.ts",
   "maintainers": [
     {
-      "name": "Tony Crisci",
-      "email": "tony@dubstepdish.com"
+      "name": "JellyBrick",
+      "email": "shlee1503@naver.com"
     }
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://github.com/dbusjs/node-dbus-next.git"
+    "url": "http://github.com/JellyBrick/node-dbus-next.git"
   },
   "dependencies": {
     "@nornagon/put": "0.0.8",
