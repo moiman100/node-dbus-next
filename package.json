@@ -1,5 +1,5 @@
 {
-  "name": "@jellybrick/dbus-next",
+  "name": "@particle/dbus-next",
   "version": "0.10.3",
   "keywords": [
     "dbus",
@@ -9,7 +9,7 @@
     "gnome",
     "kde"
   ],
-  "description": "The next great DBus library for Node",
+  "description": "The next great DBus library, fixed for modern Node",
   "files": [
     "lib/*",
     "index.js",
@@ -25,14 +25,14 @@
   "types": "types.d.ts",
   "maintainers": [
     {
-      "name": "JellyBrick",
-      "email": "shlee1503@naver.com"
+      "name": "Cole Abbeduto",
+      "email": "cole.abbeduto@particle.io"
     }
   ],
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "http://github.com/JellyBrick/node-dbus-next.git"
+    "url": "http://github.com/cole-abbeduto-particle/node-dbus-next.git"
   },
   "dependencies": {
     "@nornagon/put": "0.0.8",

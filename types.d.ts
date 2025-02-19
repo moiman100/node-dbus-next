@@ -1,5 +1,5 @@
 
-declare module 'dbus-next' {
+declare module '@particle/dbus-next' {
     import { EventEmitter } from "events";
 
     export type ObjectPath = string;
@@ -45,11 +45,11 @@ declare module 'dbus-next' {
         export class Interface extends EventEmitter {
             constructor(name: string);
             static configureMembers(members: { properties?: { [key: string]: PropertyOptions }, methods?: { [key: string]: MethodOptions }, signals?: { [key: string]: SignalOptions } }): void;
-            static emitPropertiesChanged(interface: Interface, changedProperties: { [key: string]: any }, invalidatedProperties: string[]): void
+            static emitPropertiesChanged(iface: Interface, changedProperties: { [key: string]: any }, invalidatedProperties: string[]): void
         }
-        export function property(opts: PropertyOptions): PropertyDecorator;
-        export function method(opts: MethodOptions): MethodDecorator;
-        export function signal(opts: SignalOptions): MethodDecorator;
+        export function property(opts: PropertyOptions): (prop: any, ctx: ClassFieldDecoratorContext) => typeof prop;
+        export function method(opts: MethodOptions): (method: any, ctx: ClassMethodDecoratorContext) => typeof method;
+        export function signal(opts: SignalOptions): (method: any, ctx: ClassMethodDecoratorContext) => typeof method;
     }
     export class Variant<T = any> {
         signature: string;
