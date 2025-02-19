@@ -47,9 +47,9 @@ declare module '@particle/dbus-next' {
             static configureMembers(members: { properties?: { [key: string]: PropertyOptions }, methods?: { [key: string]: MethodOptions }, signals?: { [key: string]: SignalOptions } }): void;
             static emitPropertiesChanged(iface: Interface, changedProperties: { [key: string]: any }, invalidatedProperties: string[]): void
         }
-        export function property(opts: PropertyOptions): (prop: any, ctx: ClassFieldDecoratorContext) => typeof prop;
-        export function method(opts: MethodOptions): (method: any, ctx: ClassMethodDecoratorContext) => typeof method;
-        export function signal(opts: SignalOptions): (method: any, ctx: ClassMethodDecoratorContext) => typeof method;
+        export function property<T>(opts: PropertyOptions): (prop: T, ctx: ClassFieldDecoratorContext | ClassGetterDecoratorContext) => T;
+        export function method<T>(opts: MethodOptions): (method: T, ctx: ClassMethodDecoratorContext) => T;
+        export function signal<T>(opts: SignalOptions): (method: T, ctx: ClassMethodDecoratorContext) => T;
     }
     export class Variant<T = any> {
         signature: string;
