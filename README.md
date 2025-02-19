@@ -68,8 +68,7 @@ properties.on('PropertiesChanged', (iface, changed, invalidated) => {
 For a complete example, see the [MPRIS client](https://github.com/dbusjs/node-dbus-next/blob/master/examples/mpris.js) example which can be used to control media players on the command line.
 
 ## The Service Interface
-
-You can use the `Interface` class to define your interfaces. This interfaces uses the proposed [decorators syntax](https://github.com/tc39/proposal-decorators) which is not yet part of the ECMAScript standard, but should be included one day. Unfortunately, you'll need a [Babel plugin](https://www.npmjs.com/package/@babel/plugin-proposal-decorators) to make this code work for now.
+You can use the `Interface` class to define your interfaces.
 
 ```js
 let dbus = require('dbus-next');
