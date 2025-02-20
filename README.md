@@ -19,7 +19,7 @@ Desktop users can use this library to create their own scripts and utilities to 
 As of now, dbus-next targets the latest features of JavaScript. The earliest version supported is `6.3.0`. However, the library uses `BigInt` by default for the long integer types which was introduced in `10.8.0`. If you need to support versions earlier than this, set BigInt compatibility mode. This will configure the library to use [JSBI](https://github.com/GoogleChromeLabs/jsbi) as a polyfill for long types.
 
 ```javascript
-const dbus = require('dbus-next');
+const dbus = require('@particle/dbus-next');
 dbus.setBigIntCompat(true);
 ```
 
@@ -36,7 +36,7 @@ The interface object is an event emitter that will emit the name of a signal whe
 This is a brief example of using a proxy object with the [MPRIS](https://specifications.freedesktop.org/mpris-spec/latest/Player_Interface.html) media player interface.
 
 ```js
-let dbus = require('dbus-next');
+let dbus = require('@particle/dbus-next');
 let bus = dbus.sessionBus();
 let Variant = dbus.Variant;
 
@@ -71,75 +71,76 @@ For a complete example, see the [MPRIS client](https://github.com/dbusjs/node-db
 You can use the `Interface` class to define your interfaces.
 
 ```js
-let dbus = require('dbus-next');
-let Variant = dbus.Variant;
+import dbus, { Variant, DBusError } from '@particle/dbus-next';
 
-let {
-  Interface, property, method, signal, DBusError,
-  ACCESS_READ, ACCESS_WRITE, ACCESS_READWRITE
+const {
+    Interface, property, method, signal,
+    ACCESS_READ, ACCESS_WRITE, ACCESS_READWRITE
 } = dbus.interface;
 
-let bus = dbus.sessionBus();
+export class ExampleInterface extends Interface {
+    // Can be changed internally or from the outside, but must manually emit properties changed like in set MapProperty
+    @property({ signature: 's', access: ACCESS_READWRITE })
+    SimpleProperty = 'foo';
 
-class ExampleInterface extends Interface {
-  @property({signature: 's', access: ACCESS_READWRITE})
-  SimpleProperty = 'foo';
+    _MapProperty: Record<string, Variant> = {
+        'foo': new Variant('s', 'bar'),
+        'bat': new Variant('i', 53)
+    };
 
-  _MapProperty = {
-    'foo': new Variant('s', 'bar'),
-    'bat': new Variant('i', 53)
-  };
+    @property({ signature: 'a{sv}' })
+    get MapProperty(): Record<string, Variant> {
+        return this._MapProperty;
+    }
 
-  @property({signature: 'a{sv}'})
-  get MapProperty() {
-    return this._MapProperty;
-  }
+    set MapProperty(value: Record<string, Variant>) {
+        this._MapProperty = value;
 
-  set MapProperty(value) {
-    this._MapProperty = value;
+        Interface.emitPropertiesChanged(
+            this,
+            { MapProperty: value },
+            []
+        );
+    }
 
-    Interface.emitPropertiesChanged(this, {
-      MapProperty: value
-    });
-  }
+    @method({ inSignature: 's', outSignature: 's' })
+    Echo(what: string): string {
+        return what;
+    }
 
-  @method({inSignature: 's', outSignature: 's'})
-  Echo(what) {
-    return what;
-  }
+    @method({ inSignature: 'ss', outSignature: 'vv' })
+    ReturnsMultiple(what: string, what2: string) {
+        return [
+            new Variant('s', what),
+            new Variant('s', what2)
+        ];
+    }
 
-  @method({inSignature: 'ss', outSignature: 'vv'})
-  ReturnsMultiple(what, what2) {
-    return [
-      new Variant('s', what),
-      new Variant('s', what2)
-    ];
-  }
+    @method({ inSignature: '', outSignature: '' })
+    ThrowsError(): void {
+        // the error is returned to the client
+        throw new DBusError('org.test.iface.Error', 'something went wrong');
+    }
 
-  @method({inSignature: '', outSignature: ''})
-  ThrowsError() {
-    // the error is returned to the client
-    throw new DBusError('org.test.iface.Error', 'something went wrong');
-  }
+    @method({ inSignature: '', outSignature: '', noReply: true })
+    NoReply(): void {
+        // by setting noReply to true, dbus-next will NOT send a return reply through dbus
+        // after the method is called.
+    }
 
-  @method({inSignature: '', outSignature: '', noReply: true})
-  NoReply() {
-    // by setting noReply to true, dbus-next will NOT send a return reply through dbus 
-    // after the method is called.
-  }
+    @signal({ signature: 's' })
+    HelloWorld(value: string): string {
+        // Transform value before emit
+        return value;
+    }
 
-  @signal({signature: 's'})
-  HelloWorld(value) {
-    return value;
-  }
-
-  @signal({signature: 'ss'})
-  SignalMultiple(x) {
-    return [
-      'hello',
-      'world'
-    ];
-  }
+    @signal({ signature: 'ss' })
+    SignalMultiple(x) {
+        return [
+            'hello',
+            'world'
+        ];
+    }
 }
 
 let example = new ExampleInterface('org.test.iface');
@@ -175,7 +176,7 @@ If you have an interface xml description, which can be gotten from the `org.free
 The low-level interface can be used to interact with messages directly. Create new messages with the `Message` class to be sent on the bus as method calls, signals, method returns, or errors. Method calls can be called with the `call()` method of the `MessageBus` to await a reply and `send()` can be use for messages that don't expect a reply.
 
 ```js
-let dbus = require('dbus-next');
+let dbus = require('@particle/dbus-next');
 let Message = dbus.Message;
 
 let bus = dbus.sessionBus();

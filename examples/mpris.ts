@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-let dbus = require('../');
-let program = require('commander');
+// @ts-nocheck
+import dbus from "@particle/dbus-next";
+import program from "commander";
 
 const MPRIS_IFACE = 'org.mpris.MediaPlayer2.Player';
 const MPRIS_PATH = '/org/mpris/MediaPlayer2';
@@ -12,7 +13,7 @@ async function listAll() {
   let iface = obj.getInterface('org.freedesktop.DBus');
   let names = await iface.ListNames();
   let result = names.filter((n) => n.startsWith('org.mpris.MediaPlayer2'))
-  
+
   return result;
 }
 
@@ -45,7 +46,7 @@ async function printNames() {
 }
 
 function printMetadata(metadata) {
-  for (k of Object.keys(metadata.value)) {
+  for (const k of Object.keys(metadata.value)) {
     let value = metadata.value[k].value;
     console.log(k.padEnd(23) + value);
   }

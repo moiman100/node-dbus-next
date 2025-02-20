@@ -3,6 +3,7 @@
 // TODO: test signal sending
 
 const program = require('commander');
+/** @type {import('@particle/dbus-next')} */
 const dbus = require('../');
 const Message = dbus.Message;
 const {

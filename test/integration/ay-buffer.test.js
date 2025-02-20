@@ -1,3 +1,4 @@
+/** @type {import('@particle/dbus-next')} */
 const dbus = require('../../');
 
 const Variant = dbus.Variant;

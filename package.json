@@ -34,6 +34,14 @@
     "type": "git",
     "url": "http://github.com/cole-abbeduto-particle/node-dbus-next.git"
   },
+  "scripts": {
+    "integration": "dbus-run-session -- jest ./test/integration",
+    "coverage": "dbus-run-session -- jest --coverage",
+    "unit": "jest ./test/*.test.js",
+    "test": "dbus-run-session -- jest --forceExit",
+    "doc": "jsdoc --verbose -c jsdoc.conf --readme README.md -r lib index.js -d doc",
+    "format": "cd lib && semistandard --global BigInt --fix && cd ../test && semistandard --env jest --parser babel-eslint --global BigInt --fix"
+  },
   "dependencies": {
     "@nornagon/put": "0.0.8",
     "event-stream": "4.0.1",
@@ -43,21 +51,17 @@
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.25.9",
+    "@babel/preset-env": "^7.26.9",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.13.4",
+    "babel-eslint": "^10.1.0",
     "commander": "^13.0.0",
     "handlebars": "^4.7.8",
     "jest": "^29.7.0",
     "jsdoc": "^4.0.4",
     "semistandard": "^17.0.0",
     "typescript": "^5.7.3"
-  },
-  "scripts": {
-    "integration": "dbus-run-session -- jest ./test/integration",
-    "coverage": "dbus-run-session -- jest --coverage",
-    "unit": "jest ./test/*.test.js",
-    "test": "dbus-run-session -- jest",
-    "doc": "jsdoc --verbose -c jsdoc.conf --readme README.md -r lib index.js -d doc",
-    "format": "cd lib && semistandard --global BigInt --fix && cd ../test && semistandard --env jest --global BigInt --fix"
   },
   "jest": {
     "testEnvironment": "node",

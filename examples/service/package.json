@@ -1,7 +1,0 @@
-{
-    "devDependencies": {
-    },
-    "scripts": {
-        "start": "node ./service"
-    }
-}

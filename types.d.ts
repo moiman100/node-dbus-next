@@ -42,7 +42,7 @@ declare module '@particle/dbus-next' {
             disabled?: boolean;
         }
 
-        export class Interface extends EventEmitter {
+        export class Interface {
             constructor(name: string);
             static configureMembers(members: { properties?: { [key: string]: PropertyOptions }, methods?: { [key: string]: MethodOptions }, signals?: { [key: string]: SignalOptions } }): void;
             static emitPropertiesChanged(iface: Interface, changedProperties: { [key: string]: any }, invalidatedProperties: string[]): void
@@ -118,7 +118,7 @@ declare module '@particle/dbus-next' {
         export(path: ObjectPath, interface: interface.Interface): void;
         unexport(path: ObjectPath, interface: interface.Interface): void;
 
-        requestName(name: string, flags: number): Promise<number>;
+        requestName(name: string, flags: number = 0): Promise<number>;
         releaseName(name: string): Promise<number>;
 
         newSerial(): number;
