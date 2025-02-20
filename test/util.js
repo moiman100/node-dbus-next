@@ -13,7 +13,7 @@ async function ping (bus) {
 /**
  * Waits for a message that passes a filter on a provided bus.
  */
-function waitForMessage(bus, messageFilter) {
+function waitForMessage (bus, messageFilter) {
   return new Promise((resolve) => {
     bus.on('message', (message) => {
       const isMessageValid = Object.entries(messageFilter).every(
@@ -29,5 +29,5 @@ function waitForMessage(bus, messageFilter) {
 
 module.exports = {
   ping,
-  waitForMessage,
+  waitForMessage
 };

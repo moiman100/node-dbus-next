@@ -1,5 +1,5 @@
 
-declare module 'dbus-next' {
+declare module '@particle/dbus-next' {
     import { EventEmitter } from "events";
 
     export type ObjectPath = string;
@@ -42,14 +42,14 @@ declare module 'dbus-next' {
             disabled?: boolean;
         }
 
-        export class Interface extends EventEmitter {
+        export class Interface {
             constructor(name: string);
             static configureMembers(members: { properties?: { [key: string]: PropertyOptions }, methods?: { [key: string]: MethodOptions }, signals?: { [key: string]: SignalOptions } }): void;
-            static emitPropertiesChanged(interface: Interface, changedProperties: { [key: string]: any }, invalidatedProperties: string[]): void
+            static emitPropertiesChanged(iface: Interface, changedProperties: { [key: string]: any }, invalidatedProperties: string[]): void
         }
-        export function property(opts: PropertyOptions): PropertyDecorator;
-        export function method(opts: MethodOptions): MethodDecorator;
-        export function signal(opts: SignalOptions): MethodDecorator;
+        export function property<T>(opts: PropertyOptions): (prop: T, ctx: ClassFieldDecoratorContext | ClassGetterDecoratorContext) => T;
+        export function method<T>(opts: MethodOptions): (method: T, ctx: ClassMethodDecoratorContext) => T;
+        export function signal<T>(opts: SignalOptions): (method: T, ctx: ClassMethodDecoratorContext) => T;
     }
     export class Variant<T = any> {
         signature: string;
@@ -118,7 +118,7 @@ declare module 'dbus-next' {
         export(path: ObjectPath, interface: interface.Interface): void;
         unexport(path: ObjectPath, interface: interface.Interface): void;
 
-        requestName(name: string, flags: number): Promise<number>;
+        requestName(name: string, flags: number = 0): Promise<number>;
         releaseName(name: string): Promise<number>;
 
         newSerial(): number;

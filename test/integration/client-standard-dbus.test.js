@@ -102,7 +102,7 @@ test('exported service introspection', async () => {
   const introspect = async (path) => {
     const msg = new Message({
       destination: dest,
-      path: path,
+      path,
       interface: 'org.freedesktop.DBus.Introspectable',
       member: 'Introspect'
     });

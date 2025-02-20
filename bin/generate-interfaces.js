@@ -15,7 +15,7 @@ program
   .parse(process.argv);
 
 const templateData = `
-let dbus = require('dbus-next');
+let dbus = require('@particle/dbus-next');
 let Variant = dbus.Variant;
 
 let {

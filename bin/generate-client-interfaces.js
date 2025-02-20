@@ -6,6 +6,7 @@ const xml2js = require('xml2js');
 const Handlebars = require('handlebars');
 let parser = new xml2js.Parser();
 const program = require('commander');
+/** @type {import('@particle/dbus-next')} */
 const dbus = require('../');
 const Message = dbus.Message;
 const {
@@ -351,7 +352,7 @@ async function main() {
             ifs.result = template({
                 interfaces: [ifs.interface],
                 xmlData: ifs.objectPaths.length === 1 ? ifs.xmlData : undefined,
-                objectPath: objectPath, 
+                objectPath: objectPath,
                 serviceName: ifs.serviceName
             });
 

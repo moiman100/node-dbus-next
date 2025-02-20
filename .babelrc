@@ -1,8 +1,9 @@
+// Used for Jest
 {
+  "presets": [
+    "@babel/preset-env"
+  ],
   "plugins": [
-    [ "@babel/plugin-proposal-decorators", { "decoratorsBeforeExport": true, "legacy": false } ],
-    "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-syntax-bigint",
-    "@babel/plugin-transform-async-to-generator"
+    ["@babel/plugin-proposal-decorators", { "version": "2023-11" }]
   ]
 }
