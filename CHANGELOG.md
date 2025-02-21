@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.11.0
+* Fork to @particle/dbus-next
+* Stage 3 decorators
+* Improved types
+* Some improved errors
+* Simplified test setup 
+* Etc
+
 ## v0.10.2
 
 This is a hotfix release for a bug in the system message bus.

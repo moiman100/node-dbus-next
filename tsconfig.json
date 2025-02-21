@@ -10,6 +10,7 @@
     "noEmit": true,
     "maxNodeModuleJsDepth": 2,
     "allowJs": true,
+    "checkJs": false,
     "resolveJsonModule": true
   }
 }
