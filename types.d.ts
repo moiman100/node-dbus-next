@@ -142,7 +142,7 @@ declare module '@particle/dbus-next' {
         getInterface<T extends ClientInterface>(name: string): T;
     }
     export interface ClientInterface extends EventEmitter {
-        [name: string]: Function;
+        [name: string]: <T = any>(...args: any[]) => Promise<T>;
     }
 
     export type AuthMethod = 'EXTERNAL' | 'DBUS_COOKIE_SHA1' | 'ANONYMOUS';
