@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.11.2
+* Improve some error messages to add more context
+
 ## v0.11.0
 * Fork to @particle/dbus-next
 * Stage 3 decorators
