@@ -141,7 +141,12 @@ declare module '@particle/dbus-next' {
         getInterface(name: string): ClientInterface;
         getInterface<T extends ClientInterface>(name: string): T;
     }
+    interface ClientEvents {
+        PropertiesChanged: (iface: string, changed: Record<string, Variant>, invalided: string[]) => void;
+        [key: string]: (...args: any[]) => void
+    }
     export interface ClientInterface extends EventEmitter {
+        on<K extends keyof ClientEvents>(event: K, listener: ClientEvents[K]): this;
         [name: string]: <T = any>(...args: any[]) => Promise<T>;
     }
 
