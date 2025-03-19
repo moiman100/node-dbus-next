@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.11.3
+* Add PropertiesChanged event with callback arg types for convenience
+
 ## v0.11.2
 * Improve some error messages to add more context
 
