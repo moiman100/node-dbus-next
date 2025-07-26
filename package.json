@@ -1,73 +1,76 @@
 {
-  "name": "@particle/dbus-next",
-  "version": "0.11.4",
-  "keywords": [
-    "dbus",
-    "dcop",
-    "d-bus",
-    "rpc",
-    "gnome",
-    "kde"
-  ],
-  "description": "The next great DBus library, fixed for modern Node",
-  "files": [
-    "lib/*",
-    "index.js",
-    "package.json",
-    "types.d.ts"
-  ],
-  "directories": {
-    "lib": "lib",
-    "test": "test",
-    "examples": "examples"
-  },
-  "main": "index.js",
-  "types": "types.d.ts",
-  "maintainers": [
-    {
-      "name": "Cole Abbeduto",
-      "email": "cole.abbeduto@particle.io"
+    "name": "@particle/dbus-next",
+    "version": "0.11.4",
+    "keywords": [
+        "dbus",
+        "dcop",
+        "d-bus",
+        "rpc",
+        "gnome",
+        "kde"
+    ],
+    "description": "The next great DBus library, fixed for modern Node",
+    "files": [
+        "lib/*",
+        "index.js",
+        "package.json",
+        "types.d.ts"
+    ],
+    "directories": {
+        "lib": "lib",
+        "test": "test",
+        "examples": "examples"
+    },
+    "main": "index.js",
+    "types": "types.d.ts",
+    "maintainers": [
+        {
+            "name": "Cole Abbeduto",
+            "email": "cole.abbeduto@particle.io"
+        }
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "http://github.com/particle-iot/node-dbus-next.git"
+    },
+    "scripts": {
+        "integration": "dbus-run-session -- jest ./test/integration",
+        "coverage": "dbus-run-session -- jest --coverage",
+        "unit": "jest ./test/*.test.js",
+        "test": "dbus-run-session -- jest --forceExit",
+        "doc": "jsdoc --verbose -c jsdoc.conf --readme README.md -r lib index.js -d doc",
+        "format": "cd lib && semistandard --global BigInt --fix && cd ../test && semistandard --env jest --parser babel-eslint --global BigInt --fix"
+    },
+    "optionalDependencies": {
+        "@tanislav000/usocket": "^1.0.6"
+    },
+    "dependencies": {
+        "@nornagon/put": "0.0.8",
+        "event-stream": "4.0.1",
+        "jsbi": "^4.3.0",
+        "long": "^4.0.0",
+        "safe-buffer": "^5.2.1",
+        "xml2js": "^0.6.2"
+    },
+    "devDependencies": {
+        "@babel/eslint-parser": "^7.28.0",
+        "@babel/plugin-proposal-decorators": "^7.25.9",
+        "@babel/preset-env": "^7.26.9",
+        "@types/jest": "^30.0.0",
+        "@types/node": "^22.13.4",
+        "commander": "^13.0.0",
+        "handlebars": "^4.7.8",
+        "jest": "^30.0.5",
+        "jsdoc": "^4.0.4",
+        "semistandard": "^17.0.0",
+        "typescript": "^5.7.3"
+    },
+    "jest": {
+        "testEnvironment": "node",
+        "bail": true
+    },
+    "engine": {
+        "node": ">=22.13.1"
     }
-  ],
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/particle-iot/node-dbus-next.git"
-  },
-  "scripts": {
-    "integration": "dbus-run-session -- jest ./test/integration",
-    "coverage": "dbus-run-session -- jest --coverage",
-    "unit": "jest ./test/*.test.js",
-    "test": "dbus-run-session -- jest --forceExit",
-    "doc": "jsdoc --verbose -c jsdoc.conf --readme README.md -r lib index.js -d doc",
-    "format": "cd lib && semistandard --global BigInt --fix && cd ../test && semistandard --env jest --parser babel-eslint --global BigInt --fix"
-  },
-  "dependencies": {
-    "@nornagon/put": "0.0.8",
-    "event-stream": "4.0.1",
-    "jsbi": "^4.3.0",
-    "long": "^4.0.0",
-    "safe-buffer": "^5.2.1",
-    "xml2js": "^0.6.2"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-decorators": "^7.25.9",
-    "@babel/preset-env": "^7.26.9",
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.13.4",
-    "babel-eslint": "^10.1.0",
-    "commander": "^13.0.0",
-    "handlebars": "^4.7.8",
-    "jest": "^29.7.0",
-    "jsdoc": "^4.0.4",
-    "semistandard": "^17.0.0",
-    "typescript": "^5.7.3"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "bail": true
-  },
-  "engine": {
-    "node": ">=22.13.1"
-  }
 }
